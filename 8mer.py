@@ -16,7 +16,6 @@ def load_negatively_selected_positions(csv_file):
 
 def get_matches(start_position, end_position, target_positions):
     matches = []
-    # Adjust window size for 8-mer by checking the range appropriately
     for amino_acid_position in range(start_position, end_position - 7):  
         matching_positions = [pos for pos in range(amino_acid_position, amino_acid_position + 8) if pos in target_positions]  # Corrected to 8
         if len(matching_positions) >= 3:
