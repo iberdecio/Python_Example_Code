@@ -30,8 +30,8 @@ def main():
     output_file_path = "11mersOutfile.csv"  
     with open(output_file_path, 'w', newline='') as outfile:
         writer = csv.writer(outfile)
-        writer.writerow(["Epitope", "Matches"])  # Column headers
-        for start_position in range(len(protein_sequence) - 10):  # Use an 11-mer window
+        writer.writerow(["Epitope", "Matches"])
+        for start_position in range(len(protein_sequence) - 10): 
             end_position = start_position + 11
             matches = get_matches(start_position, end_position, negatively_selected_positions)
             if matches:
@@ -39,10 +39,10 @@ def main():
                 marked_sequence = list(epitope_sequence)
                 for _, matching_positions in matches:
                     for pos in matching_positions:
-                        if pos - start_position < len(marked_sequence):  # Boundary check
+                        if pos - start_position < len(marked_sequence):
                             marked_sequence[pos - start_position] = protein_sequence[pos].upper()
                 marked_epitope_sequence = "".join(marked_sequence)
-                writer.writerow([marked_epitope_sequence, matches])  # Write to CSV
+                writer.writerow([marked_epitope_sequence, matches])
                 print(f"Writing: Epitope: {marked_epitope_sequence}, Matches: {matches}")
 
 if __name__ == "__main__":
